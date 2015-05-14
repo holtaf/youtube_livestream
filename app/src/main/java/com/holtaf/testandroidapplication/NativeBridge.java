@@ -7,5 +7,5 @@ public class NativeBridge {
 		System.loadLibrary("convertyuv");
 	}
 
-	public static native void rgbToYuv(byte[] rgbData, byte[] yuvData, int width, int height);
+	public static native void rgbToYuv(ByteBuffer rgbaData, byte[] yuvData, int width, int height);
 }
