@@ -61,7 +61,7 @@ public class VideoStreamingConnection {
 			encoding = Ffmpeg.init(width, height, AUDIO_SAMPLE_RATE, url);
 		}
 
-		videoFrameGrabber.start(new byte[width * height * 3]);
+		videoFrameGrabber.start(new byte[width * height * 4]);
 		audioFrameGrabber.start(AUDIO_SAMPLE_RATE);
 
 		Log.i(MainActivity.APP_NAME, "Ffmpeg.init() returned " + encoding);
@@ -84,9 +84,7 @@ public class VideoStreamingConnection {
 	public void sendVideoFrame(byte[] bytes) {
 		if (encoding) {
 			synchronized (lock) {
-				long start = System.currentTimeMillis();
 				Ffmpeg.encodeVideoFrame(bytes);
-				Log.d("frame", "send frame real - " + (System.currentTimeMillis() - start));
 			}
 		}
 	}
